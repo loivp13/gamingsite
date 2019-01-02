@@ -1,6 +1,92 @@
+@import url("https://fonts.googleapis.com/css?family=Anton|Ubuntu+Condensed");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.top.menu, .item.topBanner:before {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: none !important;
+  margin-left: 6em !important;
+  margin-top: 2em !important; }
+
+.logo {
+  text-align: center;
+  font-family: 'Anton', sans-serif; }
+
+.logo1 {
+  color: red;
+  font-size: 40px; }
+
+.logo2 {
+  color: black;
+  font-size: 40px; }
+
+.logo3 {
+  padding-top: 10px; }
+
+.banner_header_gray {
+  font-size: 1.3em;
+  padding-top: 10px;
+  padding-left: 15px; }
+
+.ui.pointing.banner_small_font {
+  font-size: .9em;
+  color: red; }
+
+.ui.dropdown .menu.banner_question_dropdown {
+  left: -40px; }
+
+.ui.pointing.banner_small_font .menu .item.banner_question:after {
+  color: red !important; }
+
+.ui.menu .item:before {
+  width: 0px; }
+
+a.item.banner_small_font {
+  font-size: .9em;
+  color: red !important; }
+
+a.item.banner_small_font:hover {
+  text-decoration: underline; }
 
 /*# sourceMappingURL=style.css.map */
