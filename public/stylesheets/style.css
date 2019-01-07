@@ -113,13 +113,13 @@ i.search.icon {
 
 .signIn_cart {
   display: flex !important;
-  flex-basis: 25vw; }
+  flex-basis: 25vw;
+  max-height: 7vh; }
 
 button.ui.button.signIn {
   border: #e9e9e9 solid 1px;
-  line-height: 70% !important; }
-
-button.ui.button.signIn {
+  line-height: 70% !important;
+  text-align: center !important;
   flex-basis: 60%;
   margin-right: 0 !important;
   background: #f5f5f5;
@@ -137,7 +137,8 @@ button.ui.button.cart {
 .signIn_text {
   font-size: .7em;
   color: grey;
-  font-wight: normal !important; }
+  font-wight: normal !important;
+  align-text: center !important; }
 
 i.shopping.cart.icon {
   font-size: 2em;
@@ -165,5 +166,8 @@ i.cart_text {
   height: 5em !important;
   bottom: 3.1em !important;
   left: 1em; }
+
+.dropdown_account {
+  display: inline-block; }
 
 /*# sourceMappingURL=style.css.map */
