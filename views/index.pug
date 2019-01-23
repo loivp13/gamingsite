@@ -1,7 +1,11 @@
 extends layout
 
-block content  
-  div.ui.container       
-    include ./navbars/topBanner/topBanner 
-    include ./navbars/searchBar/searchBar_signIn
-    include ./navbars/consoleNavigation_main/consoleNavigation
+block content
+    .container
+        include ./navbars/navigation_signIn.pug
+        .row
+            .col-sm-12.col-md-9
+                include ./searchGames/searchGames.pug
+            .col-md-3
+                include ./wishList/wishList.pug
+                

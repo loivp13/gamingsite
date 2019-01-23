@@ -1,1 +1,1 @@
-$(".ui.dropdown").dropdown();
+(function($) {})($);

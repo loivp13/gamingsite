@@ -1,9 +1,19 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+let SearchFunction = require("./Actions/SearchFunction");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", async (req, res, next) => {
+  try {
+    let addToList = req.query.addGame;
+    let searchedDataArray = await SearchFunction();
+    res.render("index", {
+      title: "Express",
+      searchedDataArray,
+      addToList
+    });
+  } catch (e) {
+    next(e);
+  }
 });
-
 module.exports = router;
