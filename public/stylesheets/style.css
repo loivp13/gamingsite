@@ -65,4 +65,14 @@ table {
   height: 500px;
   border: 1px solid white; }
 
+.signUp.box {
+  margin-top: 3.5em;
+  width: 400px;
+  height: 400px; }
+
+.login.box {
+  margin-top: 3.5em;
+  width: 400px;
+  height: 400px; }
+
 /*# sourceMappingURL=style.css.map */

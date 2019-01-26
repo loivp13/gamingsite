@@ -4,6 +4,8 @@
             h4 Welcome!
             p Click the heart to add items!
         else
-            //- h4 Welcome #{user1.username}
-            //- each game in addToList.wishList 
+            h4 Welcome #{addToList.user1.username}
+            each game in addToList.user1.wishList
+                 img.img-thumbnail(src=game.user1, alt="")
+            p.wishList_totalPrice #{addToList.user1.total}     
         

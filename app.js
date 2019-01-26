@@ -5,19 +5,21 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const sassMiddleware = require("node-sass-middleware");
 const favicon = require("serve-favicon");
-const session = require("express-session");
 const validator = require("express-validator");
-const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const session = require("express-session");
 // const webpack = require("webpack");
 // const webpackConfig = require("./config/webpack.dev");
 // const compiler = webpack(webpackConfig);
-
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const searchRouter = require("./routes/searchFunction");
 
 const app = express();
-
+//connect to mongodb
+const mongoDB =
+  "mongodb://masterveloute:Heyheyhey3@ds023684.mlab.com:23684/game_app";
+mongoose.connect(mongoDB);
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -39,8 +41,6 @@ app.use(
 app.use(
   session({
     sessionId: req => {
-      console.log("Inside the session middleware");
-      console.log(req.sessionID);
       return "4873647364723"; // use UUIDs for session IDs
     },
     secret: "dhfpaiojdhfopshdapfsapfoidnfopsangspd",

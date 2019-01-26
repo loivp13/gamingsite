@@ -27,5 +27,5 @@ form(action="/searchGame", method='GET')
                     .col-1.card_footer_price.d-flex.pr-1.justify-content-start $#{gameObj.price}
                     form.col-2.card_footer_form(action="/users/loi", method='post')
                             - let addToList = [gameObj.icon_image, gameObj.price]
-                            button.pb-1(name='addGame', type='submit', value=JSON.stringify(addToList))
+                            button.form_button_addGame.pb-1(name='addGame', type='submit', value=JSON.stringify(addToList))
                                 i.fas.fa-heart.text-danger              

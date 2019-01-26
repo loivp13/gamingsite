@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    .container
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.justify-content-between.mb-3.rounded-bottom
+            a.navbar-brand(href='/') GameApp
+    .signUp.bg-primary.box.container.rounded.d-none#SignUp
+        .row.justify-content-center
+            h1.signUp_header.pt-4 Sign Up
+        form(action="/users/register", method='post')
+            .form-group
+                label(for="signUp_username").pb-1 Username
+                input(type="text", placeholder='Enter a username').form-control#signUp_username
+            .form-group
+                label(for="signUp_password").pb-1 Password
+                input(type="password", placeholder='Enter a password').form-control#signUp_password
+            .form-group
+                label(for="signUp_email").pb-1 Email
+                input(type="hidden", name='_csrf', value=csrfToken)
+                input(type="email", placeholder='Enter an email').form-control#signUp_email
+            button(type='submit').btn.btn-success.mb-3 Sign Up!
+        hr.my-2
+        .row.justify-content-center.align-items-center.mt-5
+            p Already have an account Login!
+            .button_login.pl-3
+                button.btn-success.btn.btn_login Login
+
+    .login.bg-success.box.container.rounded#Login
+        .row.justify-content-center
+            h1.login.pt-4 Login
+        form(action="/users/login", method='post')
+            .form-group
+                label(for="login_username").pb-1 Username
+                input(type="text", placeholder='Enter your username').form-control#login_username
+            .form-group
+                label(for="signUp_password").pb-1 Password
+                input(type="password", placeholder='Enter a password').form-control#login_password
+                input(type="hidden", name='_csrf', value=csrfToken)
+            button(type='submit').btn.btn-primary Login
+        hr.my-2
+        .row.justify-content-center.align-items-center.mt-5
+            p Don't have an account?
+            .button_login.pl-3
+                button.btn-primary.btn.btn_signUp Sign Up!
+        
