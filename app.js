@@ -8,18 +8,22 @@ const favicon = require("serve-favicon");
 const validator = require("express-validator");
 const mongoose = require("mongoose");
 const session = require("express-session");
-// const webpack = require("webpack");
-// const webpackConfig = require("./config/webpack.dev");
-// const compiler = webpack(webpackConfig);
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const searchRouter = require("./routes/searchFunction");
+const passport = require("passport");
+const flash = require("connect-flash");
 
 const app = express();
+
 //connect to mongodb
 const mongoDB =
   "mongodb://masterveloute:Heyheyhey3@ds023684.mlab.com:23684/game_app";
 mongoose.connect(mongoDB);
+
+//use Passport config
+require("./config/passport");
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -29,29 +33,8 @@ app.set("view cache", false);
 app.use(
   favicon(path.join(__dirname, "public", "images", "favicon", "favicon.ico"))
 );
-// use webpack-middleware
-// use webpack-hot-reloader
-// app.use(
-//   require("webpack-dev-middleware")(compiler, {
-//     noInfo: true,
-//     public: webpackConfig.output.publicPath
-//   })
-// );
-// app.use(require("webpack-hot-middleware")(compiler));
-app.use(
-  session({
-    sessionId: req => {
-      return "4873647364723"; // use UUIDs for session IDs
-    },
-    secret: "dhfpaiojdhfopshdapfsapfoidnfopsangspd",
-    resave: false,
-    saveUninitialized: true
-  })
-);
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+//use sassMiddleware
 app.use(
   sassMiddleware({
     src: path.join(__dirname, "public"),
@@ -60,11 +43,69 @@ app.use(
     sourceMap: true
   })
 );
+
+//use express-session
+app.use(
+  session({
+    sessionId: req => {
+      return "4873647364723"; // use UUIDs for session IDs
+    },
+    secret: "dhfpaiojdhfopshdapfsapfoidnfopsangspd",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+//connect flash for messages
+app.use(flash());
+
+//require in and use express messages
+app.use(function(req, res, next) {
+  res.locals.messages = require("express-messages")(req, res);
+  next();
+});
+
+//express validator middleware
+app.use(
+  validator({
+    errorFormatter: function(param, msg, value) {
+      let namespace = param.split("."),
+        root = namespace.shift(),
+        formParam = root;
+
+      while (namespace.length) {
+        formParam += `[${namespace.shift()}]`;
+      }
+
+      return {
+        param: formParam,
+        msg,
+        value
+      };
+    }
+  })
+);
+
+// start passport in session
+app.use(passport.initialize());
+app.use(passport.session());
+
+//use logger
+app.use(logger("dev"));
+
+//use body-parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+//use cookieParser
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//Express routes
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/searchGame", searchRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

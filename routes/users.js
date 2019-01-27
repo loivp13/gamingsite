@@ -3,18 +3,33 @@ const router = express.Router();
 const csrf = require("csurf");
 const csrfProtection = csrf();
 const handleUsers = require("./Actions/HandleUsers");
+const passport = require("passport");
+
 router.use(csrfProtection);
-/* GET users listing. */
+
+/* Account login page */
 router.get("/login", function(req, res, next) {
-  res.render("login", { csrfToken: req.csrfToken() });
+  let messages = req.flash("error");
+  res.render("login", {
+    csrfToken: req.csrfToken()
+  });
 });
-router.post("/login", (req, res, next) => {
+
+// User attempt to login
+router.post("/login", function(req, res, next) {
   res.redirect("/");
 });
-router.post("/register", function(req, res, next) {
-  console.log("got one");
-  res.redirect("/");
-});
+
+//User attempt to register
+router.post(
+  "/register",
+  passport.authenticate("local.signup", {
+    successRedirect: "/",
+    failureRedirect: "/users/login"
+  })
+);
+
+//User adding to wish list
 router.post("/:userName", function(req, res, next) {
   let game = req.body.addGame;
   let user = req.params.userName;

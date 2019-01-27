@@ -1,3 +1,4 @@
+"use strict";
 (function($) {
   let addGameButton = $(".card_footer_form");
   addGameButton.on("submit", e => {
