@@ -1,11 +1,5 @@
 "use strict";
-(function($) {
-  let addGameButton = $(".card_footer_form");
-  addGameButton.on("submit", e => {
-    e.preventDefault();
-    axios.post("/users/loi", {});
-  });
-})($);
+(function($) {})($);
 
 //toggle Login/SignUp
 (function($) {
@@ -26,4 +20,9 @@
     signUpForm.toggleClass("d-none");
     loginForm.classList.add("d-none");
   }
+})($);
+
+//toggle tooltip
+(function($) {
+  $("[data-toogle=tooltip]").tooltip();
 })($);

@@ -1,7 +1,27 @@
+// ===============================
+// ===========SEARCHBAR===========
+// ===============================
+#input_button_search
+    border: none
+    transition: color 0.5s ease
+    color: $OffWhite
+    font-size: 1.5em
+    background-color: black
+#input_button_search:active, #input_button_search:focus, #input_button_search:hover
+    outline: none !important
+    box-shadow: one
+    color: green !important
+    cursor: pointer
+// ===============================
+// ===========CARD================
+// ===============================
 .card
-    border: 5px solid black
+    min-width: 15em
+    border: 15px solid black
+    border-top-left-radius: 10em
+    border-top-right-radius: 10em
     img.card-img-top
-        height: 250px;
+        height: 250px
         border: 1px #000000 solid
     .card-body
         .card-text
@@ -26,6 +46,9 @@
                         color: #8a2831
                     .fa-heart
                         font-size: 1.5em
+                button:active, button:focus
+                    outline: none !important
+                    box-shadow: none
         .card_footer_releaseDate
             font-size: .8em
         .fa-header:hover

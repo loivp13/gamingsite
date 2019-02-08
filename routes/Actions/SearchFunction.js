@@ -13,15 +13,6 @@ module.exports = async function(term = "super-smash") {
     return searchObject.data.results.map(gameObj => {
       return filterResponse(gameObj);
     });
-    // (res => {
-    //   let results = res.data.results;
-    //   let dataForPug = results.map(gameObj => {
-    //     return filterResponse(gameObj);
-    //   });
-    //   console.log(dataForPug);
-    //   console.log("++++++++++++++");
-    //   return dataForPug;
-    // });
   } catch (error) {
     console.log("search Function ERROR", error);
   }

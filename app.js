@@ -13,7 +13,7 @@ const usersRouter = require("./routes/users");
 const searchRouter = require("./routes/searchFunction");
 const passport = require("passport");
 const flash = require("connect-flash");
-
+console.log("starting");
 const app = express();
 
 //connect to mongodb
@@ -34,6 +34,8 @@ app.use(
   favicon(path.join(__dirname, "public", "images", "favicon", "favicon.ico"))
 );
 
+//use logger
+app.use(logger("dev"));
 //use sassMiddleware
 app.use(
   sassMiddleware({
@@ -44,27 +46,29 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, "public")));
+
+//use body-parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+//use cookieParser
+app.use(cookieParser());
+
 //use express-session
 app.use(
   session({
-    sessionId: req => {
-      return "4873647364723"; // use UUIDs for session IDs
-    },
     secret: "dhfpaiojdhfopshdapfsapfoidnfopsangspd",
     resave: true,
     saveUninitialized: true
   })
 );
-
 //connect flash for messages
 app.use(flash());
-
 //require in and use express messages
 app.use(function(req, res, next) {
   res.locals.messages = require("express-messages")(req, res);
   next();
 });
-
 //express validator middleware
 app.use(
   validator({
@@ -85,21 +89,21 @@ app.use(
     }
   })
 );
-
 // start passport in session
 app.use(passport.initialize());
 app.use(passport.session());
 
-//use logger
-app.use(logger("dev"));
+//Enable CSRF Protection
+const csrf = require("csurf");
+const csrfProtection = csrf();
+app.use(csrfProtection);
 
-//use body-parser
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-//use cookieParser
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+//Adding variables for app.locals 
+app.use("/", function(req, res, next) {
+  res.locals.login = req.isAuthenticated();
+  res.locals.cart = req.session.cart;
+  next();
+});
 
 //Express routes
 app.use("/", indexRouter);

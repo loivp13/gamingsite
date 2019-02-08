@@ -10,7 +10,8 @@ router.get("/", async (req, res, next) => {
     res.render("index", {
       title: "Express",
       searchedDataArray,
-      addToList
+      addToList,
+      csrfToken: req.csrfToken()
     });
   } catch (e) {
     next(e);
